@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { Grid } from '@material-ui/core';
+import { GoogleMapsComponent } from './components/GoogleMaps'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -112,48 +113,64 @@ export default function SelectDropDown() {
 
 
   return (
-    <Grid >
 
-      <FormControl className={classes.formControl} onChange={providerChanged}>
-        <InputLabel htmlFor="uncontrolled-native">Provider</InputLabel>
-        <NativeSelect
-          defaultValue={""}
-          inputProps={{
-            name: 'Select your Provider',
-            id: 'uncontrolled-native',
-          }}
+    <Grid container spacing={0} justify='center' alignItems='center'>
 
-        >
-          <option value=""></option>
-          {providersList.map((p) => (
-            <option key={p.id} value={p.id} {...isSelected(provider, p)}>{p.name}</option>
-          ))}
-        </NativeSelect>
+      <Grid item className='center' xs={12}>
+        <FormControl className={classes.formControl} onChange={providerChanged}>
+          <InputLabel htmlFor="uncontrolled-native">Provider</InputLabel>
+          <NativeSelect
+            defaultValue={""}
+            inputProps={{
+              name: 'Select your Provider',
+              id: 'uncontrolled-native',
+            }}
 
-        <FormHelperText>Select Your Provider</FormHelperText>
-      </FormControl>
-      <FormControl className={classes.formControl} onChange={procedureChanged}>
-        <InputLabel htmlFor="uncontrolled-native">Procedure</InputLabel>
-        <NativeSelect
-          defaultValue={""}
-          inputProps={{
-            name: 'Select your Procedure',
-            id: 'uncontrolled-native',
-          }}
+          >
 
-        >
-          <option value=""></option>
-          {proceduresList.map((p) => (
-            <option key={p.id} value={p.id} {...isSelected(procedure, p)}>{p.name}</option>
-          ))}
-        </NativeSelect>
-        <FormHelperText>Select Your Procedure</FormHelperText>
-      </FormControl>
+            <option value=""></option>
+            {providersList.map((p) => (
+              <option key={p.id} value={p.id} {...isSelected(provider, p)}>{p.name}</option>
+            ))}
+          </NativeSelect>
 
-      <p>Selected Procedure: {procedure?.name}</p>
-      <p>In Network Cost: {cost?.in_network_cost}</p>
-      <p>Out of Network Cost: {cost?.out_of_network_cost}</p>
-      <Button variant="contained" color="primary" onClick={resetApp}>Reset</Button>
+          <FormHelperText>Select Your Provider</FormHelperText>
+        </FormControl>
+      </Grid>
+      <Grid item className='center' xs={12}>
+
+        <FormControl className={classes.formControl} onChange={procedureChanged}>
+          <InputLabel htmlFor="uncontrolled-native">Procedure</InputLabel>
+          <NativeSelect
+            defaultValue={""}
+            inputProps={{
+              name: 'Select your Procedure',
+              id: 'uncontrolled-native',
+            }}
+
+          >
+            <option value=""></option>
+            {proceduresList.map((p) => (
+              <option key={p.id} value={p.id} {...isSelected(procedure, p)}>{p.name}</option>
+            ))}
+          </NativeSelect>
+          <FormHelperText>Select Your Procedure</FormHelperText>
+        </FormControl>
+      </Grid>
+
+      <Grid container className='center' direction='column' xs={12}>
+        <p>Selected Procedure: {procedure?.name}</p>
+
+        {/* </Grid> */}
+        {/* <Grid item className='center' xs={12}>> */}
+        <p>In Network Cost: {cost?.in_network_cost}</p>
+
+        {/* </Grid> */}
+        {/* <Grid item className='center' xs={12}>> */}
+        <p>Out of Network Cost: {cost?.out_of_network_cost}</p>
+
+      </Grid>
+      <Button className='resetButton' variant="contained" color="primary" onClick={resetApp}>Reset</Button>
 
     </Grid>
   );

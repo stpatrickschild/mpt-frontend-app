@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { AboutUs } from './components/AboutUs';
 import { InsuranceFinder }from './components/Insurancefinder';
@@ -128,16 +129,26 @@ export default function App() {
     <div >
       
       <AppBar/>
+      
       <Container className="background">
-
       </Container>
+      <Router>
+            <Switch>
+              <Route exact path="/" component={MedicalPriceTransparency} />
+              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/providerscost" component={ProvidersCost} />
+              <Route path="/insurancefinder" component={InsuranceFinder} />
+              <Route path="/resources" component={Resources} />
+              <Route component={NoMatch} />
+            </Switch>
+          </Router>
+
+  
       <Container spacing={3}>
      
      
        
-        <Grid item xs={12} className="center">
-        <SelectDropDown />
-        </Grid>
+        
         {/* <Grid item xs={12}>
         <ControlledAccordions />
       </Grid> */}

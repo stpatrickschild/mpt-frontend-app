@@ -7,6 +7,11 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import { Grid } from '@material-ui/core';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    width: "1em",
   },
   title: {
     flexGrow: 1,
@@ -63,11 +69,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 export default function SearchAppBar() {
   const classes = useStyles();
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    console.log(event.currentTarget)
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <div className={classes.root}>
+    // <div className={classes.root}>
+    <Grid container>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -75,11 +95,28 @@ export default function SearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={handleClick}
           >
             <MenuIcon />
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              
+              <Router> <Link to="/insurancefinder"><MenuItem  onClick={handleClose}>Insurance Finder</MenuItem></Link>
+              <Link to="/aboutus"><MenuItem  onClick={handleClose}>About Us</MenuItem></Link>
+              <Link to="/"><MenuItem  ransparencyonClick={handleClose}>Merical Price Transparency</MenuItem></Link>
+              <Link to="/providerscost"><MenuItem onClick={handleClose}>Providers Cost</MenuItem></Link>
+              <Link to="/resources"><MenuItem onClick={handleClose}>Resources</MenuItem></Link></Router>
+            </Menu>
           </IconButton>
+
+
           <Typography className={classes.title} variant="h6" noWrap>
-            WA state Medical Cost Transparency 
+            WA state Medical Cost Transparency
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -96,6 +133,7 @@ export default function SearchAppBar() {
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+      {/* </div> */}
+    </Grid>
   );
 }

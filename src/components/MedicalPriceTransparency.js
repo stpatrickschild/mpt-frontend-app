@@ -1,15 +1,17 @@
 import React from 'react';
 import './MedicalPriceTransparency.css'
-
+import { Grid } from '@material-ui/core';
+import SelectDropDown from '../SelectDropDown'
+import { GoogleMapsComponent } from './GoogleMaps'
 
 // class MedicalPriceTransparency  extends Component {
-  
- 
+
+
 //   render () {
 //     return (
 //       <div className="medicalpricetransparency">
 //         <button>Medical Price Transparency</button>
-        
+
 //       </div>
 //       );
 //   };
@@ -36,6 +38,13 @@ export const MedicalPriceTransparency = () => (
     <h2>Insurance Companies </h2>
     <p>Why do you exist, and why isn't Goverment interfering with what you are doing </p>
     <p>Why do you exist, and why isn't Goverment interfering with what you are doing </p>
+    <GoogleMapsComponent 
+    isMarkerShown 
+    addresses={["2208 w dravus seattle wa 98199"]}
+    />
+    <Grid item xs={12} className="center">
+      <SelectDropDown />
+    </Grid>
   </div>
 )
 
